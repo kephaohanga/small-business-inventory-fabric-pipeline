@@ -1,0 +1,37 @@
+table gold_dim_employees
+	lineageTag: beadbc1c-ea11-4024-bf08-b343964f2da9
+	sourceLineageTag: [dbo].[gold_dim_employees]
+
+	column EmployeeID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a0cea043-bc9a-462f-8f44-77df893344a7
+		sourceLineageTag: EmployeeID
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1d0b9003-f926-479d-9ad3-2445ba7ac2b9
+		sourceLineageTag: BranchID
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_employees = entity
+		mode: directLake
+		source
+			entityName: gold_dim_employees
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,88 @@
+table gold_fact_stock_ledger
+	lineageTag: 7b0acdd4-9e0d-4206-8250-3047d3c666ae
+	sourceLineageTag: [dbo].[gold_fact_stock_ledger]
+
+	column ReferenceID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fcf3e5d4-0fc0-4da6-a5c6-8c39bd687268
+		sourceLineageTag: ReferenceID
+		summarizeBy: none
+		sourceColumn: ReferenceID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MovementDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: b020f4f3-7806-460c-92a2-055650cdcc39
+		sourceLineageTag: MovementDate
+		summarizeBy: none
+		sourceColumn: MovementDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9e9a71db-e1d8-4dd0-affe-feaf34049eff
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column StockMovement
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: d0593e14-3d7d-4f56-9d02-b4e5dec4c9be
+		sourceLineageTag: StockMovement
+		summarizeBy: sum
+		sourceColumn: StockMovement
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MovementType
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3ed6c6ae-24b9-4e95-9cf9-eb82d71261f7
+		sourceLineageTag: MovementType
+		summarizeBy: none
+		sourceColumn: MovementType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BalanceAfterMovement
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: d5d29a9c-eaa6-44fc-8ec1-641015cfd75c
+		sourceLineageTag: BalanceAfterMovement
+		summarizeBy: sum
+		sourceColumn: BalanceAfterMovement
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_fact_stock_ledger = entity
+		mode: directLake
+		source
+			entityName: gold_fact_stock_ledger
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

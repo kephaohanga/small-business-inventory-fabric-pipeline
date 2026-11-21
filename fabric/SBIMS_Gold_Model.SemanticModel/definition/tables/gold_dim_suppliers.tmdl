@@ -1,0 +1,37 @@
+table gold_dim_suppliers
+	lineageTag: 20ff46f6-df85-405e-ae12-af16ee1de8f4
+	sourceLineageTag: [dbo].[gold_dim_suppliers]
+
+	column SupplierID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dd9ab09c-d846-4b79-a73e-98a203caef2c
+		sourceLineageTag: SupplierID
+		summarizeBy: none
+		sourceColumn: SupplierID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SupplierName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 03daddcc-68b5-4a66-88bd-02d3c157a9e1
+		sourceLineageTag: SupplierName
+		summarizeBy: none
+		sourceColumn: SupplierName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_suppliers = entity
+		mode: directLake
+		source
+			entityName: gold_dim_suppliers
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

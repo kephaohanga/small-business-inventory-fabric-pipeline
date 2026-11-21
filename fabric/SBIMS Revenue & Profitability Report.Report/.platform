@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "SBIMS Revenue & Profitability Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4d91644e-d8cc-9361-4f2e-ad4d247aef85"
+  }
+}

@@ -1,0 +1,29 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+annotation PBI_ProTooling = ["WebModelingEdit"]
+
+ref table gold_dim_suppliers
+ref table gold_dim_branches
+ref table gold_fact_stock_reconciliation
+ref table gold_dim_employees
+ref table gold_dim_products
+ref table gold_fact_stock_ledger
+ref table gold_fact_expenses
+ref table gold_fact_stock_purchases
+ref table gold_dim_payment_methods
+ref table gold_fact_sales
+ref table gold_fact_stock_adjustments
+ref table gold_dim_date
+ref table gold_dim_expense_categories
+

@@ -1,0 +1,37 @@
+table gold_dim_payment_methods
+	lineageTag: 5d0afbd8-be9e-41df-bf83-bc05674ea11e
+	sourceLineageTag: [dbo].[gold_dim_payment_methods]
+
+	column PaymentMethodID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f45aa269-3812-4c17-87a3-9b9bfb07834a
+		sourceLineageTag: PaymentMethodID
+		summarizeBy: none
+		sourceColumn: PaymentMethodID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethodName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0d0bc88f-be6f-4ef9-9bbb-6e4d3af37468
+		sourceLineageTag: PaymentMethodName
+		summarizeBy: none
+		sourceColumn: PaymentMethodName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_payment_methods = entity
+		mode: directLake
+		source
+			entityName: gold_dim_payment_methods
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

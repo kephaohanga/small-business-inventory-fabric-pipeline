@@ -1,0 +1,316 @@
+table gold_fact_sales
+	lineageTag: d6c77e7d-4b95-4335-ac68-9f416d957f60
+	sourceLineageTag: [dbo].[gold_fact_sales]
+
+	measure 'Total Revenue' = SUM(gold_fact_sales[Revenue])
+		lineageTag: 3a003964-8391-4cdf-a60e-d986a1a30b03
+
+		changedProperty = Name
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Cost' = SUM(gold_fact_sales[Cost])
+		lineageTag: c26f2b36-f2a1-4832-b3fb-0a385ba1219b
+
+		changedProperty = Name
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Gross Profit' = SUM(gold_fact_sales[GrossProfit])
+		lineageTag: aad812be-fd75-4409-a63c-fd4aefd3a4c5
+
+		changedProperty = Name
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Transactions' = COUNTROWS(gold_fact_sales)
+		formatString: 0
+		lineageTag: 2916ce59-9cd5-41be-aeed-7ffb0edcebee
+
+		changedProperty = Name
+
+		changedProperty = IsHidden
+
+	measure 'Total Expenses' = SUM(gold_fact_expenses[Amount])
+		lineageTag: 2b1d8449-87d5-4867-8319-50c9ffbb0589
+
+		changedProperty = Name
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Gross Margin %' =
+			
+			DIVIDE(
+			    SUM(gold_fact_sales[GrossProfit]),
+			    SUM(gold_fact_sales[Revenue]),
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: acf37287-6069-4804-b8ad-1666d3087586
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure 'Is Loss-Making Product' =
+			
+			IF(
+			    CALCULATE(SUM(gold_fact_sales[GrossProfit])) < 0,
+			    "Yes",
+			    "No"
+			)
+		lineageTag: e4cd4ff4-8a1f-46c9-9301-ba876e9308ba
+
+		changedProperty = Name
+
+		changedProperty = IsHidden
+
+	measure 'Net Profit' = [Gross Profit] - [Total Expenses]
+		lineageTag: be9f3d39-4826-43ca-b2a8-a663e4ab0acf
+
+		changedProperty = Name
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Margin %' = DIVIDE([Net Profit], [Total Revenue])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 10813cf5-20f5-4752-854e-59d4fac701f4
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Revenue per Employee' = DIVIDE([Total Revenue], DISTINCTCOUNT(gold_fact_sales[EmployeeID]))
+		lineageTag: f7077591-1734-48c0-845e-12d875047700
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Employees = DISTINCTCOUNT(gold_fact_sales[EmployeeID])
+		formatString: 0
+		lineageTag: e511934c-8769-4d5b-a346-c01e3a08fc33
+
+		changedProperty = Name
+
+	measure 'Sales Transactions' = CALCULATE(COUNTROWS(gold_fact_sales), gold_fact_sales[TransactionType] = "Income")
+		formatString: 0
+		lineageTag: cf329570-83d2-4687-b1fe-d2da5bbbedac
+
+		changedProperty = Name
+
+	column TransactionID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 44a77758-be47-4d6f-8374-2b4a0af95f8f
+		sourceLineageTag: TransactionID
+		summarizeBy: none
+		sourceColumn: TransactionID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TransactionDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 9cd51acc-45e3-41db-b96b-b47fee7eaa80
+		sourceLineageTag: TransactionDate
+		summarizeBy: none
+		sourceColumn: TransactionDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TransactionType
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7dd8e59e-8f27-40b7-a9a9-b4391c49f2f2
+		sourceLineageTag: TransactionType
+		summarizeBy: none
+		sourceColumn: TransactionType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 77120062-f002-42b8-be6c-5d88dc097489
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 0fda4dd3-bb30-4b9a-ba82-648064c6f294
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OriginalTransactionID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a4ceb0c3-cb1c-46a5-a8bc-e3fee6193137
+		sourceLineageTag: OriginalTransactionID
+		summarizeBy: none
+		sourceColumn: OriginalTransactionID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiscountRate
+		dataType: double
+		sourceProviderType: float
+		lineageTag: f69aaa6b-85f5-40d8-b07b-30c77353fc6a
+		sourceLineageTag: DiscountRate
+		summarizeBy: none
+		sourceColumn: DiscountRate
+
+		changedProperty = SummarizeBy
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PaymentMethod
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 503bd19f-e8aa-4b8e-a406-08bc9b942178
+		sourceLineageTag: PaymentMethod
+		summarizeBy: none
+		sourceColumn: PaymentMethod
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 26c1d10f-a6b0-4d1f-8545-7a21a9fb0a27
+		sourceLineageTag: BranchID
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f7d67e1e-671e-47d1-9cb1-259c37908e7a
+		sourceLineageTag: EmployeeID
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a8f9a1f4-e2a8-482d-8330-9d6436323d15
+		sourceLineageTag: Notes
+		summarizeBy: none
+		sourceColumn: Notes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		dataType: double
+		sourceProviderType: float
+		lineageTag: d4edf910-b636-467d-b989-6a23c53736ab
+		sourceLineageTag: Revenue
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cost
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 1733ce7f-32f4-45f3-bafe-16f6c5e49748
+		sourceLineageTag: Cost
+		summarizeBy: sum
+		sourceColumn: Cost
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GrossProfit
+		dataType: double
+		sourceProviderType: float
+		lineageTag: fefb0629-3f34-47df-b476-79dcf2514fdc
+		sourceLineageTag: GrossProfit
+		summarizeBy: sum
+		sourceColumn: GrossProfit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RefundAmount
+		dataType: double
+		sourceProviderType: float
+		lineageTag: ef5c445e-18b0-443b-8315-0b2cf8587b78
+		sourceLineageTag: RefundAmount
+		summarizeBy: sum
+		sourceColumn: RefundAmount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition gold_fact_sales = entity
+		mode: directLake
+		source
+			entityName: gold_fact_sales
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

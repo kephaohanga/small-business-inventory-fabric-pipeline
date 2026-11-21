@@ -1,0 +1,111 @@
+table gold_dim_date
+	lineageTag: 5071ce4c-ad86-4915-a5bc-52a7715cd859
+	sourceLineageTag: [dbo].[gold_dim_date]
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 08db5397-d294-4fbf-b710-9d32d73ccd4b
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f9775e53-84a2-4ca7-bae8-a53a8ef79bca
+		sourceLineageTag: Year
+		summarizeBy: none
+		sourceColumn: Year
+
+		changedProperty = SummarizeBy
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column MonthNumber
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6c8db7be-9fff-481b-972e-51fd23076f06
+		sourceLineageTag: MonthNumber
+		summarizeBy: none
+		sourceColumn: MonthNumber
+
+		changedProperty = SummarizeBy
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column MonthName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 27b9ab33-464b-4a14-bf30-bcebf7d2fc49
+		sourceLineageTag: MonthName
+		summarizeBy: none
+		sourceColumn: MonthName
+		sortByColumn: MonthNumber
+
+		changedProperty = IsHidden
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 630115a2-6011-4f26-a791-66c5746d433c
+		sourceLineageTag: Quarter
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		changedProperty = SummarizeBy
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	hierarchy 'Date Hierarchy'
+		lineageTag: 866cee66-417a-49e8-bdde-00757cad10fe
+
+		level Date
+			lineageTag: 626b8709-091c-4fe3-b340-e1e8c0eb3837
+			column: Date
+
+		level Year
+			lineageTag: 28276fb3-2a4c-447e-b1e8-d1ed191d6bc6
+			column: Year
+
+		level Quarter
+			lineageTag: 32ff04be-316e-45e9-bada-2341952f6597
+			column: Quarter
+
+		level MonthName
+			lineageTag: 39e27425-7b0c-480a-b2c6-2410a7da28ec
+			column: MonthName
+
+		changedProperty = IsHidden
+
+	partition gold_dim_date = entity
+		mode: directLake
+		source
+			entityName: gold_dim_date
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,41 @@
+relationship 973de402-0e1b-02db-3aa7-fc78b254005e
+	fromColumn: gold_fact_sales.ProductID
+	toColumn: gold_dim_products.ProductID
+
+relationship 48fb557e-8e52-d422-9f5a-fc66aed485ab
+	fromColumn: gold_fact_sales.BranchID
+	toColumn: gold_dim_branches.BranchID
+
+relationship 1c1f9fd1-ec24-7f15-5d39-264e7cc39e14
+	fromColumn: gold_fact_sales.EmployeeID
+	toColumn: gold_dim_employees.EmployeeID
+
+relationship c0eb1fa9-415b-dd10-16de-b9ae0d85f41b
+	fromColumn: gold_fact_sales.PaymentMethod
+	toColumn: gold_dim_payment_methods.PaymentMethodID
+
+relationship 0f5b0867-7e68-28a9-e7c7-c0ef888587f4
+	isActive: false
+	fromColumn: gold_fact_expenses.BranchID
+	toColumn: gold_dim_branches.BranchID
+
+relationship e60ec67b-18d7-d5d9-249e-55d324a9acc2
+	fromColumn: gold_fact_stock_purchases.SupplierID
+	toColumn: gold_dim_suppliers.SupplierID
+
+relationship 0ca9614d-4aeb-0a96-edcb-04ad96330466
+	fromColumn: gold_fact_stock_ledger.ProductID
+	toColumn: gold_dim_products.ProductID
+
+relationship 6546935a-7b3c-f9a7-dc07-9ba723275839
+	fromColumn: gold_fact_sales.TransactionDate
+	toColumn: gold_dim_date.Date
+
+relationship c057ec95-9e9b-1050-0e1d-a64db9182c32
+	fromColumn: gold_fact_expenses.ExpenseDate
+	toColumn: gold_dim_date.Date
+
+relationship 442689f4-6633-7094-ac98-085ff4c44c42
+	fromColumn: gold_fact_expenses.ExpenseCategoryID
+	toColumn: gold_dim_expense_categories.ExpenseCategoryID
+

@@ -1,0 +1,37 @@
+table gold_dim_branches
+	lineageTag: ba172742-22c4-49e7-91bc-706463a8638f
+	sourceLineageTag: [dbo].[gold_dim_branches]
+
+	column BranchID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7c40048c-dc8e-4d62-b80c-edf1110491a4
+		sourceLineageTag: BranchID
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5b4dedd8-899c-4366-9ee2-fc7986bafcfe
+		sourceLineageTag: BranchName
+		summarizeBy: none
+		sourceColumn: BranchName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_branches = entity
+		mode: directLake
+		source
+			entityName: gold_dim_branches
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,112 @@
+table gold_fact_expenses
+	lineageTag: f0a27552-7b77-401a-bed1-17cd4613555a
+	sourceLineageTag: [dbo].[gold_fact_expenses]
+
+	column ExpenseID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7fcb15ba-b90a-423c-845c-28c5503733ac
+		sourceLineageTag: ExpenseID
+		summarizeBy: none
+		sourceColumn: ExpenseID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpenseDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 9f24526f-23e4-4edd-ad87-088742beb1b3
+		sourceLineageTag: ExpenseDate
+		summarizeBy: none
+		sourceColumn: ExpenseDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpenseCategoryID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2b235bec-85dc-4528-a738-0d102a4d5770
+		sourceLineageTag: ExpenseCategoryID
+		summarizeBy: none
+		sourceColumn: ExpenseCategoryID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 96ccce9d-2471-47a9-ae75-c2b92e237e30
+		sourceLineageTag: Description
+		summarizeBy: none
+		sourceColumn: Description
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 7228c34b-9286-41cb-a76f-3dfe4c02dfc5
+		sourceLineageTag: Amount
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PaymentMethodID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5239ee42-553a-47cf-b477-1c7218bdde54
+		sourceLineageTag: PaymentMethodID
+		summarizeBy: none
+		sourceColumn: PaymentMethodID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dda9d1f8-13d9-4fdd-8233-564078c96680
+		sourceLineageTag: BranchID
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 53867e59-5a2c-4044-bb6f-5cb822a996f5
+		sourceLineageTag: EmployeeID
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_fact_expenses = entity
+		mode: directLake
+		source
+			entityName: gold_fact_expenses
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,43 @@
+table gold_dim_expense_categories
+	lineageTag: 6683b77c-d157-4ec7-8363-02f17994ae87
+	sourceLineageTag: [dbo].[gold_dim_expense_categories]
+
+	column ExpenseCategoryID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 49cdb8f6-56a9-4cf2-9b69-ee0a6320edb9
+		sourceLineageTag: ExpenseCategoryID
+		summarizeBy: none
+		sourceColumn: ExpenseCategoryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpenseCategory
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5cb4d9f4-3354-4d1b-aeca-a465c95c6fa9
+		sourceLineageTag: ExpenseCategory
+		summarizeBy: none
+		sourceColumn: ExpenseCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column CategoryDescription
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1f7cea90-bd48-4551-9fdf-2b6dd733fa30
+		sourceLineageTag: CategoryDescription
+		summarizeBy: none
+		sourceColumn: CategoryDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_expense_categories = entity
+		mode: directLake
+		source
+			entityName: gold_dim_expense_categories
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,164 @@
+table gold_fact_stock_purchases
+	lineageTag: d3132046-ace1-48f4-8fcc-dba4204dffd3
+	sourceLineageTag: [dbo].[gold_fact_stock_purchases]
+
+	column PurchaseID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bde0f52b-ac16-4d2d-9f4b-19c8cfc0d6d6
+		sourceLineageTag: PurchaseID
+		summarizeBy: none
+		sourceColumn: PurchaseID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PurchaseDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 83716646-0b12-45b1-a5fb-4c2b50fcee36
+		sourceLineageTag: PurchaseDate
+		summarizeBy: none
+		sourceColumn: PurchaseDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f9e6ea85-4dde-49d6-8e4d-504d94da2c7f
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5e0f0252-8080-46b4-bf94-c3f6f5a72dab
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitCost
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 9e4a2446-fd9f-40bd-abd3-1a05a8e3492f
+		sourceLineageTag: UnitCost
+		summarizeBy: none
+		sourceColumn: UnitCost
+
+		changedProperty = SummarizeBy
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PurchaseStatus
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 82996b66-50bc-4a35-935e-bc44584c30ff
+		sourceLineageTag: PurchaseStatus
+		summarizeBy: none
+		sourceColumn: PurchaseStatus
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostedDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: e7483d2b-9d53-4fbd-b98b-c3b1cc74abd2
+		sourceLineageTag: PostedDate
+		summarizeBy: none
+		sourceColumn: PostedDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethodID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 036d58ff-f078-4a9e-8d44-24e56758fa14
+		sourceLineageTag: PaymentMethodID
+		summarizeBy: none
+		sourceColumn: PaymentMethodID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 96b8a5af-9b31-43b1-a479-01d0d0c78772
+		sourceLineageTag: BranchID
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 69437eef-0e54-4698-b3c1-4f303443a0a8
+		sourceLineageTag: EmployeeID
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ec56e899-25fc-4d78-81d0-5cdc0970cc3d
+		sourceLineageTag: Notes
+		summarizeBy: none
+		sourceColumn: Notes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SupplierID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ab5877cd-0290-483d-bf3e-820ae08a5cfd
+		sourceLineageTag: SupplierID
+		summarizeBy: none
+		sourceColumn: SupplierID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_fact_stock_purchases = entity
+		mode: directLake
+		source
+			entityName: gold_fact_stock_purchases
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

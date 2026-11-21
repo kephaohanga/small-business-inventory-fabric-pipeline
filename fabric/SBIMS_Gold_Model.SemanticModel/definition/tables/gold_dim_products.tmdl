@@ -1,0 +1,123 @@
+table gold_dim_products
+	lineageTag: 9c249f92-fc5a-40d4-a249-a835efc05d87
+	sourceLineageTag: [dbo].[gold_dim_products]
+
+	measure 'Products Generating Losses' =
+			
+			VAR LossMakingProducts =
+			    FILTER(
+			        VALUES(gold_dim_products[ProductName]),
+			        CALCULATE(SUM(gold_fact_sales[GrossProfit])) < 0
+			    )
+			RETURN
+			    COUNTROWS(LossMakingProducts)
+		formatString: 0
+		lineageTag: ed70588e-43cf-4d0c-a93e-141605aabe36
+
+		changedProperty = Name
+
+		changedProperty = IsHidden
+
+	column ProductID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c73b44b0-f680-4cc3-af0b-7d0c23e8bc3e
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4f4b6ce5-3e52-4280-8828-ec080d7c66fe
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 576b0da1-5126-4950-bba5-63a3f2ae841a
+		sourceLineageTag: Category
+		summarizeBy: none
+		sourceColumn: Category
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 374a461d-19f8-4354-8e50-5495d1ff8bc1
+		sourceLineageTag: UnitPrice
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UnitCost
+		dataType: double
+		sourceProviderType: float
+		lineageTag: cda14043-539a-4de9-9433-c9230144de96
+		sourceLineageTag: UnitCost
+		summarizeBy: sum
+		sourceColumn: UnitCost
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ReorderLevel
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 66b1da53-36bf-4b1d-b2c1-9711bfcba639
+		sourceLineageTag: ReorderLevel
+		summarizeBy: none
+		sourceColumn: ReorderLevel
+
+		changedProperty = SummarizeBy
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column MaxStock
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: bfc94613-43d3-4d22-8401-ee929aba2e99
+		sourceLineageTag: MaxStock
+		summarizeBy: sum
+		sourceColumn: MaxStock
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_products = entity
+		mode: directLake
+		source
+			entityName: gold_dim_products
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

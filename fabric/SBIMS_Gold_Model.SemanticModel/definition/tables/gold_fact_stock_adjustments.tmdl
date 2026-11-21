@@ -1,0 +1,111 @@
+table gold_fact_stock_adjustments
+	lineageTag: ce2d2eb3-ace7-44ab-ac39-40c51ef4b894
+	sourceLineageTag: [dbo].[gold_fact_stock_adjustments]
+
+	column AdjustmentID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7fc8fccc-8b6a-44dd-80ad-9d14a6fb9553
+		sourceLineageTag: AdjustmentID
+		summarizeBy: none
+		sourceColumn: AdjustmentID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AdjustmentDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: c13be023-4d16-4dd4-8e08-ad7f3945ccb7
+		sourceLineageTag: AdjustmentDate
+		summarizeBy: none
+		sourceColumn: AdjustmentDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AdjustmentType
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f48c7560-a132-4c81-a862-68043cab85bd
+		sourceLineageTag: AdjustmentType
+		summarizeBy: none
+		sourceColumn: AdjustmentType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4dc59647-1518-4a32-9ec4-91ab50d44fa0
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 7d5f406b-c062-4743-a545-283bce65f5a8
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reason
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 391e6073-5ea0-4a74-b02d-db0efb8d4977
+		sourceLineageTag: Reason
+		summarizeBy: none
+		sourceColumn: Reason
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: af2e5a1d-21c3-436e-a1df-1a2d7f2dc95a
+		sourceLineageTag: BranchID
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fa1d86f6-c91c-4f88-a8ae-e39f9df75b5c
+		sourceLineageTag: EmployeeID
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_fact_stock_adjustments = entity
+		mode: directLake
+		source
+			entityName: gold_fact_stock_adjustments
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
